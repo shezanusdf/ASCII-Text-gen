@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASCII Art Generator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>ASCII Text Generator</h1>
+
+    <form method="POST">
+
+        <label>Enter Message</label>
+        <input type="text" name="message" required>
+
+        <label>Select Template</label>
+        <select name="template">
+            {% for t in templates %}
+            <option value="{{ t }}" {% if t == selected %}selected{% endif %}>
+                {{ t }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Generate</button>
+
+    </form>
+
+    {% if rendered %}
+        <h3>Output</h3>
+
+        <button id= 'copyBtn' onclick = "copyOutput()">Copy Output</button>
+
+        <pre id = "asciiOutput">{{ rendered }}</pre>
+    {% endif %}
+
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
